@@ -52,7 +52,7 @@ __global__ void Crossing(float *ary, float *sort_ary, size_t N, int *crossing)
 	float high = mid * 4.5;
 	float low = mid * 2.0;
 	int tid = blockIdx.x * blockDim.x + threadIdx.x;
-	if (tid == 1) printf("%f  %f\n", high, low);
+	//if (tid == 1) printf("%f  %f\n", high, low);
 	if (tid < N)
 	{
 		if (ary[tid] < high && ary[tid] >= low)  crossing[tid] = 1;
