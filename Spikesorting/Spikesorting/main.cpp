@@ -1,4 +1,4 @@
-#define _CRT_SECURE_NO_WARNINGS
+﻿#define _CRT_SECURE_NO_WARNINGS
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -13,13 +13,13 @@
 #define NUMS CHANNEL*SAMPLE
 
 extern "C"
-void mixGPU(int *crossing, float *ary, int *mark, size_t N);
+void mixGPU(int *crossing, float *ary_t, float *ary, int *mark, size_t N);
 
 int main()
 {
 	/***************************read the file************************************/
 	FILE *fp;
-	float traces_f[NUMS];
+	float traces_f[NUMS],traces_t[NUMS];
 	fp = fopen("traces_f.txt", "rt");
 	if (fp == NULL)
 	{ 
@@ -35,8 +35,24 @@ int main()
 	int crossing[NUMS];
 	memset(crossing, 0, sizeof(crossing));
 
-	mixGPU(crossing,traces_f, mark,NUMS);
+	mixGPU(crossing,traces_t, traces_f, mark,NUMS);
 	/*****************************end*******************************************/
+	//for (int i = 0; i < 30; i++){
+	//	for (int j = 0; j < 30; j++)
+	//	{
+	//		printf("%f  ", traces_t[i * 32 + j]);
+	//	}
+	//	printf("\n");
+	//}
+
+	//for (int i = 0; i < 30; i++){
+	//	for (int j = 0; j < 30; j++)
+	//	    {
+	//		    printf("%d  ", crossing[i * 32 + j]);
+	//	    }
+	//	printf("\n");
+	//}
+		
 	getchar();
 	return 0;
 }
