@@ -30,6 +30,7 @@ int main()
 	/****************************************/
 	for (int i = 0; i < 40; i++)
 		for (int j = 0; j < 32; j++){
+			//if (i%2 == 0)
 			crossing[i][j] = rand() % 3;
 			printf("%d ", crossing[i][j]);
 			//if (crossing[i][j] == 1)
@@ -55,6 +56,7 @@ int main()
 	/***********************************flood_fill algorithm*************************************************************/
 	int c_label = 1;
 	int join_size = 1;
+	printf("------> weak crossing numbers: %d\n", mark.size());
 	for (int i_s_ch = 0; i_s_ch < mark.size(); i_s_ch++){
 		temp = mark[i_s_ch];
 		int i_s = temp.first;
@@ -62,6 +64,7 @@ int main()
 		for (int j_s = max(i_s - join_size, 0);  j_s <= i_s;  j_s++){
 			for (int j_ch = max(i_ch -  2, 0);   j_ch<= min(i_ch + 2,31);  j_ch++){
 				int adjlabel = label[j_s][ j_ch];
+				//printf(" j_s, j_ch, adjlabel---->:%d  %d  %d  \n", j_s, j_ch, adjlabel);
 				if (adjlabel){
 					int curlabel = label[i_s][i_ch];
 					if (curlabel == 0){
@@ -86,7 +89,7 @@ int main()
 				}
 			}
 		}
-		if (label[i_s, i_ch] == 0){
+		if (label[i_s][ i_ch] == 0){
 			label[i_s][i_ch] = c_label;
 			temp = make_pair(i_s, i_ch);
 			comps[c_label].push_back(temp);
@@ -102,7 +105,7 @@ int main()
 	for (const auto &w : comps){
 		tmp = w.second;
 		for (int ii = 0; ii < tmp.size(); ii++)
-			printf("%d %d", tmp[ii].first, tmp[ii].second);
+			printf("[ %d %d ] ", tmp[ii].first, tmp[ii].second);
 		printf("\n");
 	}
 	printf("ending...\n");
