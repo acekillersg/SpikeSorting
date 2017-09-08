@@ -5,7 +5,7 @@
 #include <map>
 #include <vector>
 #include <utility>
-#include "paramenters.h"
+#include "parameters.h"
 #include "Eigen/Dense"
 #ifndef SPIKEDETECT__H__
 #define SPIKEDETECT__H__

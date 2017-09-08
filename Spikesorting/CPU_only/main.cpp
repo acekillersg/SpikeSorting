@@ -1,8 +1,8 @@
-#pragma once
-#pragma execution_character_set("utf-8")
-
+//#pragma once
+//#pragma execution_character_set("utf-8")
+//
 #include <iostream>
-#include "paramenters.h"
+#include "parameters.h"
 #include "spikedetect.h"
 #include "probe.h"
 #include "preprossingdata.h"
@@ -74,7 +74,7 @@ int main()
 	int n_pca = p.get_n_features_per_channel();
 	std::vector< std::vector< std::vector <float> > > out(n_spikes, std::vector<std::vector<float> >(CHANNELS, vector<float>(n_pca)));
 	s.PCA(n_spikes, waveforms, masks, out);
-	//s.output();
+	s.output();
 
 	/*-------------------------------------preprossingdata.h²¿·Ö------------------------------------*/
 	Preprossingdata data(n_spikes, CHANNELS, n_pca, out, masks);
@@ -92,7 +92,7 @@ int main()
 
 	system("Pause");
 }
-
+//
 //#include<iostream>
 //#include<algorithm>
 //#include<cstdlib>
