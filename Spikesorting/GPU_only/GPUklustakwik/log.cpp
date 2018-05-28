@@ -1,0 +1,47 @@
+// Disable some Visual Studio warnings
+#define _CRT_SECURE_NO_WARNINGS
+
+#include "log.h"
+#include "params.h"
+#include<stdio.h>
+#include <stdarg.h>
+
+FILE *logfp;
+
+// Write to screen and log file
+void Output(char *fmt, ...) {
+	va_list arg;
+	char str[STRLEN];
+
+	if (!Screen && !Log) return;
+	va_start(arg, fmt);
+	vsnprintf(str, STRLEN, fmt, arg);
+	va_end(arg);
+
+	if (Screen) printf("%s", str);
+	if (Log) fprintf(logfp, "%s", str);
+	FlushLog();
+}
+
+// Print an error message and abort
+void Error(char *fmt, ...) {
+	va_list arg;
+	char str[STRLEN];
+
+	if (!Screen && !Log) return;
+	va_start(arg, fmt);
+	vsnprintf(str, STRLEN, fmt, arg);
+	va_end(arg);
+
+	if (Screen) fprintf(stderr, "%s", str);
+	if (Log) fprintf(logfp, "%s", str);
+	FlushLog();
+}
+
+void FlushLog()
+{
+	if (Log)
+	{
+		fflush(logfp);
+	}
+}
